@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "docs": "Manuais",
+    "features": "Camadas",
+    "github": "GitHub"
+  },
+  "lang": {
+    "label": "Idioma",
+    "en-US": "English",
+    "pt-BR": "Português"
+  },
+  "hero": {
+    "eyebrow": "Observador unificado de OpenTelemetry",
+    "title": "Um observador minúsculo. Cada camada do seu host.",
+    "highlight": "Tudo isso falado em OpenTelemetry fluente.",
+    "subtitle": "O HarnessSphere é um binário único e autossuficiente que observa tudo o que importa em uma máquina rodando a stack de IA Claw/Harness — host, contêiner, gateway, o harness de IA, suas ferramentas e as chamadas de API — e envia tudo como OpenTelemetry limpo e padronizado.",
+    "ctaPrimary": "Começar agora",
+    "ctaGithub": "Ver no GitHub",
+    "stats": {
+      "binary": "Binário único",
+      "binaryHint": "Sem agentes para cuidar",
+      "layers": "7 camadas",
+      "layersHint": "Do host à IA, num só painel",
+      "otel": "100% OTel",
+      "otelHint": "Sinais independentes de fornecedor"
+    }
+  },
+  "why": {
+    "eyebrow": "Por que ele existe",
+    "title": "Rodar um agente de IA significa rodar vários sistemas empilhados uns sobre os outros.",
+    "body": "Um host que pode ficar sem memória. Um contêiner que pode bater nos limites de cgroup. Um gateway que fica instável. Um harness de IA queimando tokens e chamando ferramentas. E um fluxo constante de chamadas de API que podem começar a falhar.",
+    "painTitle": "Sem o HarnessSphere",
+    "pain": [
+      "Cinco ferramentas diferentes, cinco dashboards costurados na mão",
+      "Pulando de aba às 3 da manhã tentando achar a causa real",
+      "Sem como saber se o modelo ficou lento por causa do gateway ou do host"
+    ],
+    "solutionTitle": "Com o HarnessSphere",
+    "solution": [
+      "Um binário, um único painel, uma única linha do tempo",
+      "Ele vive no mesmo host, então correlaciona uma lentidão da IA com a exata pressão de recursos que a causou",
+      "Coloque e comece a enxergar — sem runtime para instalar"
+    ]
+  },
+  "layers": {
+    "eyebrow": "As sete camadas",
+    "title": "Ele modela seu host como sete camadas isoladas.",
+    "subtitle": "Duas são Críticas — o observador se recusa a rodar cego sem elas. As demais são Opcionais: se sumirem ou se comportarem mal, elas saem de cena em silêncio e nunca derrubam o observador.",
+    "critical": "Crítica",
+    "optional": "Opcional",
+    "items": {
+      "host": { "name": "Host", "desc": "CPU, memória, swap, disco e rede da máquina física ou virtual por baixo de tudo." },
+      "self": { "name": "O Observador", "desc": "O HarnessSphere cuida das próprias costas — sua pegada e a saúde do seu laço de coleta." },
+      "container": { "name": "Contêiner", "desc": "Lê as estatísticas de cgroup v2 direto do kernel. Sem socket do Docker, sem API de runtime, sem permissões extras." },
+      "gateway": { "name": "Gateway", "desc": "Latência de rota e saúde de conexões, raspando o endpoint Prometheus do gateway e recebendo OTLP." },
+      "harness": { "name": "Harness (a IA)", "desc": "A estrela do show. Uso de tokens, durações e transações de IA, seguindo as convenções semânticas GenAI." },
+      "tools": { "name": "Ferramentas", "desc": "Cada ferramenta que a IA invoca, cronometrada e contada, seguindo a convenção de span execute_tool do GenAI." },
+      "api": { "name": "Chamadas de API", "desc": "O tráfego HTTP e gRPC entrando e saindo, correlacionado com os traces de IA acima." }
+    }
+  },
+  "resilience": {
+    "eyebrow": "Ele nunca se derruba",
+    "title": "Um observador que quebra é pior do que observador nenhum.",
+    "subtitle": "Resiliência aqui não é um recurso — é a fundação.",
+    "points": [
+      { "title": "Três camadas de contenção", "body": "Cada coletor roda na própria task. Um erro normal é capturado. Um panic inesperado é contido via catch_unwind. Uma task morta é observada e reiniciada." },
+      { "title": "Crítico vs. Opcional", "body": "Só Host e Self são Críticos. Se um falha persistentemente, o observador descarrega o que pode e sai ruidosamente. Todo o resto degrada, recua e tenta de novo." },
+      { "title": "Um alvo ausente não é erro", "body": "Sem contêiner? Sem gateway respondendo? Isso é Indisponível, não uma queda — o coletor fica de fora e segue sondando." },
+      { "title": "Um backend morto não trava a coleta", "body": "Se o seu endpoint OpenTelemetry some, a exportação falha em silêncio no fundo enquanto a coleta continua." }
+    ]
+  },
+  "runsAnywhere": {
+    "eyebrow": "Roda em qualquer lugar",
+    "title": "Um binário, estaticamente linkado, sem runtime para instalar.",
+    "subtitle": "De um servidor Linux parrudo até um Raspberry Pi.",
+    "targets": [
+      "Linux x86_64 (estático)",
+      "Linux ARM64 (estático)",
+      "Raspberry Pi 32-bit e 64-bit",
+      "macOS (Intel + Apple Silicon)"
+    ],
+    "note": "O perfil de release é ajustado para um binário pequeno e sem dependências — otimizado para tamanho, com LTO e stripped."
+  },
+  "ecosystem": {
+    "eyebrow": "Nascido do ecossistema Claw/Harness",
+    "title": "Projetado para encaixar nas ferramentas reais que as pessoas usam.",
+    "subtitle": "Esses componentes empurram a própria telemetria, então o HarnessSphere age como um hub local de coleta-e-enriquecimento: recebe o que eles emitem, carimba com o contexto do host, normaliza convenções e encaminha um único fluxo organizado.",
+    "items": [
+      { "name": "OpenClaw", "desc": "Empurra OTLP e expõe Prometheus, emitindo métricas gen_ai.* padronizadas e suas próprias chaves openclaw.*." },
+      { "name": "Hermes Agent", "desc": "Empurra spans OTLP aninhados para sessões, chamadas de LLM e ferramentas via hermes-otel." },
+      { "name": "PicoClaw", "desc": "A opção ultraleve — perfeita para os alvos Raspberry Pi." }
+    ]
+  },
+  "cta": {
+    "title": "Comece a enxergar cada camada.",
+    "subtitle": "Compile, aponte para o seu terminal para uma primeira olhada e então envie para qualquer backend OpenTelemetry.",
+    "primary": "Ler os manuais",
+    "secondary": "Dar uma estrela no GitHub"
+  },
+  "footer": {
+    "tagline": "O observador unificado de OpenTelemetry para o ecossistema de IA Claw/Harness.",
+    "product": "Produto",
+    "resources": "Recursos",
+    "docs": "Documentação",
+    "github": "Repositório no GitHub",
+    "license": "Licença: MIT OU Apache-2.0",
+    "builtBy": "Um projeto do Lepista Bioinformatics Lab",
+    "rights": "Distribuído sob MIT OU Apache-2.0."
+  },
+  "docs": {
+    "title": "Documentação",
+    "subtitle": "Manuais de configuração e uso do HarnessSphere, do primeiro build a um pipeline OTLP completo.",
+    "backToDocs": "Todos os manuais",
+    "backToHome": "Voltar ao início",
+    "onThisPage": "Nesta página",
+    "download": "Baixar .md",
+    "downloadHint": "Markdown puro — útil para bots e leitura offline",
+    "loading": "Carregando…",
+    "errorTitle": "Não foi possível carregar este documento",
+    "errorBody": "A página que você procura não está disponível. Tente outro manual.",
+    "fallbackNotice": "Este manual ainda não está disponível no seu idioma — exibindo a versão em inglês.",
+    "readTime": "manual",
+    "categories": {
+      "basics": "Primeiros passos",
+      "configuration": "Configuração",
+      "integration": "Integração",
+      "reference": "Referência"
+    }
+  }
+}

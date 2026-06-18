@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   HarnessSphere design system — derived from the lepista.com.br brand:
+   dark-first, deep purple-black canvas, brand purple + category accents.
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Brand purple scale */
+  --color-brand-200: #cbade7;
+  --color-brand-300: #ac7dd6;
+  --color-brand-400: #9260c4;
+  --color-brand-500: #7b49a0;
+  --color-brand-600: #663a88;
+  --color-brand-700: #512d6e;
+  --color-brand-800: #3d2154;
+  --color-brand-900: #2a153a;
+  --color-brand-950: #120a19;
+  --color-brand-975: #0d0713;
+
+  /* Category accents (each layer/section gets its own signal colour) */
+  --color-azure: #3080ff;
+  --color-azure-soft: #54a2ff;
+  --color-signal: #00c758;
+  --color-signal-soft: #05df72;
+  --color-infra: #64c5eb;
+  --color-infra-soft: #80d2f0;
+  --color-saas: #e84d8a;
+  --color-saas-soft: #f57cae;
+  --color-science: #feb326;
+  --color-alert: #ff6568;
+
+  /* Typography */
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-brand-975);
+    color: #f5f1fb;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Layered radial gradient mesh — atmosphere, not a flat fill */
+    background-image:
+      radial-gradient(60rem 60rem at 12% -8%, color-mix(in oklab, var(--color-brand-600) 38%, transparent), transparent 70%),
+      radial-gradient(50rem 50rem at 100% 0%, color-mix(in oklab, var(--color-azure) 16%, transparent), transparent 65%),
+      radial-gradient(70rem 50rem at 50% 120%, color-mix(in oklab, var(--color-brand-700) 30%, transparent), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand-400) 55%, transparent);
+    color: #fff;
+  }
+
+  /* Fine grain overlay for depth */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Staggered entrance used by the hero */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  opacity: 0;
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Code highlighting (rehype-highlight → highlight.js classes) ──
+   On-brand theme so docs code blocks match the rest of the site. */
+.hljs {
+  color: #e7defb;
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+  color: var(--color-brand-300);
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name {
+  color: var(--color-brand-300);
+}
+.hljs-string,
+.hljs-attr,
+.hljs-template-tag {
+  color: var(--color-signal-soft);
+}
+.hljs-number,
+.hljs-literal,
+.hljs-type {
+  color: var(--color-science);
+}
+.hljs-title,
+.hljs-section,
+.hljs-function .hljs-title {
+  color: var(--color-infra-soft);
+}
+.hljs-attribute,
+.hljs-variable,
+.hljs-meta {
+  color: var(--color-azure-soft);
+}
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: var(--color-saas-soft);
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}

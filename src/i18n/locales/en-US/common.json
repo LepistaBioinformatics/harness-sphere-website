@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "features": "Layers",
+    "github": "GitHub"
+  },
+  "lang": {
+    "label": "Language",
+    "en-US": "English",
+    "pt-BR": "Português"
+  },
+  "hero": {
+    "eyebrow": "Unified OpenTelemetry watcher",
+    "title": "One tiny watcher. Every layer of your host.",
+    "highlight": "All of it spoken in fluent OpenTelemetry.",
+    "subtitle": "HarnessSphere is a single, self-contained binary that watches everything that matters on a machine running the Claw/Harness AI stack — host, container, gateway, the AI harness, its tools and the API calls — and ships it all as clean, standard OpenTelemetry.",
+    "ctaPrimary": "Get started",
+    "ctaGithub": "View on GitHub",
+    "stats": {
+      "binary": "Single binary",
+      "binaryHint": "No agents to babysit",
+      "layers": "7 layers",
+      "layersHint": "Host → AI, one pane of glass",
+      "otel": "100% OTel",
+      "otelHint": "Vendor-neutral signals"
+    }
+  },
+  "why": {
+    "eyebrow": "Why it exists",
+    "title": "Running an AI agent means running several systems stacked on top of each other.",
+    "body": "A host that can run out of memory. A container that can hit its cgroup limits. A gateway that gets flaky. An AI harness burning tokens and calling tools. And a constant stream of API calls that can start failing.",
+    "painTitle": "Without HarnessSphere",
+    "pain": [
+      "Five different tools, five dashboards stitched together by hand",
+      "Tab-hopping at 3 a.m. trying to find the real cause",
+      "No way to tell if the model slowed down because of the gateway or the host"
+    ],
+    "solutionTitle": "With HarnessSphere",
+    "solution": [
+      "One binary, one pane of glass, one timeline",
+      "It lives on the same host, so it correlates an AI slowdown with the exact resource pressure that caused it",
+      "Drop it in and start seeing — no runtime to install"
+    ]
+  },
+  "layers": {
+    "eyebrow": "The seven layers",
+    "title": "It models your host as seven isolated layers.",
+    "subtitle": "Two are Critical — the watcher refuses to run blind without them. The rest are Optional: if they go missing or misbehave, they quietly step aside and never take the watcher down.",
+    "critical": "Critical",
+    "optional": "Optional",
+    "items": {
+      "host": { "name": "Host", "desc": "CPU, memory, swap, disk and network of the physical or virtual machine underneath everything." },
+      "self": { "name": "The Watcher", "desc": "HarnessSphere watches its own back — its footprint and the health of its collection loop." },
+      "container": { "name": "Container", "desc": "Reads cgroup v2 stats straight from the kernel. No Docker socket, no runtime API, no extra permissions." },
+      "gateway": { "name": "Gateway", "desc": "Route latency and connection health, by scraping the gateway's Prometheus endpoint and receiving OTLP." },
+      "harness": { "name": "Harness (the AI)", "desc": "The star of the show. Token usage, durations and AI transactions, following the GenAI semantic conventions." },
+      "tools": { "name": "Tools", "desc": "Every tool the AI invokes, timed and counted, following the GenAI execute_tool span convention." },
+      "api": { "name": "API Calls", "desc": "The HTTP and gRPC traffic flowing in and out, correlated with the AI traces above." }
+    }
+  },
+  "resilience": {
+    "eyebrow": "It never takes itself down",
+    "title": "A watcher that crashes is worse than no watcher at all.",
+    "subtitle": "Resilience isn't a feature here — it's the foundation.",
+    "points": [
+      { "title": "Three layers of containment", "body": "Every collector runs in its own task. A normal error is caught. An unexpected panic is contained via catch_unwind. A dead task is observed and restarted." },
+      { "title": "Critical vs. Optional", "body": "Only Host and Self are Critical. If one fails persistently, the watcher flushes and exits loudly. Everything else degrades, backs off and retries." },
+      { "title": "A missing target isn't an error", "body": "No container? No gateway responding? That's Unavailable, not a crash — the collector sits out and keeps probing." },
+      { "title": "A dead backend doesn't block collection", "body": "If your OpenTelemetry endpoint disappears, export fails quietly in the background while collection keeps running." }
+    ]
+  },
+  "runsAnywhere": {
+    "eyebrow": "Runs anywhere",
+    "title": "One binary, statically linked, no runtime to install.",
+    "subtitle": "From a beefy Linux server down to a Raspberry Pi.",
+    "targets": [
+      "Linux x86_64 (static)",
+      "Linux ARM64 (static)",
+      "Raspberry Pi 32-bit & 64-bit",
+      "macOS (Intel + Apple Silicon)"
+    ],
+    "note": "The release profile is tuned for a small, dependency-free binary — optimized for size, LTO, stripped."
+  },
+  "ecosystem": {
+    "eyebrow": "Born from the Claw/Harness ecosystem",
+    "title": "Designed to fit the real tools people run.",
+    "subtitle": "These components push their telemetry, so HarnessSphere acts as a local collect-and-enrich hub: it receives what they emit, stamps it with host context, normalizes conventions and forwards one tidy stream.",
+    "items": [
+      { "name": "OpenClaw", "desc": "Pushes OTLP and exposes Prometheus, emitting standard gen_ai.* metrics and its own openclaw.* keys." },
+      { "name": "Hermes Agent", "desc": "Pushes nested OTLP spans for sessions, LLM calls and tools via hermes-otel." },
+      { "name": "PicoClaw", "desc": "The ultra-light option — perfect for the Raspberry Pi targets." }
+    ]
+  },
+  "cta": {
+    "title": "Start seeing every layer.",
+    "subtitle": "Build it, point it at your terminal for a first look, then ship to any OpenTelemetry backend.",
+    "primary": "Read the docs",
+    "secondary": "Star on GitHub"
+  },
+  "footer": {
+    "tagline": "The unified OpenTelemetry watcher for the Claw/Harness AI ecosystem.",
+    "product": "Product",
+    "resources": "Resources",
+    "docs": "Documentation",
+    "github": "GitHub repository",
+    "license": "License: MIT OR Apache-2.0",
+    "builtBy": "A Lepista Bioinformatics Lab project",
+    "rights": "Released under MIT OR Apache-2.0."
+  },
+  "docs": {
+    "title": "Documentation",
+    "subtitle": "Configuration and usage manuals for HarnessSphere, from first build to a full OTLP pipeline.",
+    "backToDocs": "All docs",
+    "backToHome": "Back to home",
+    "onThisPage": "On this page",
+    "download": "Download .md",
+    "downloadHint": "Raw Markdown — handy for bots and offline reading",
+    "loading": "Loading…",
+    "errorTitle": "Couldn't load this document",
+    "errorBody": "The page you're looking for isn't available. Try another manual.",
+    "fallbackNotice": "This manual isn't available in your language yet — showing the English version.",
+    "readTime": "manual",
+    "categories": {
+      "basics": "Getting started",
+      "configuration": "Configuration",
+      "integration": "Integration",
+      "reference": "Reference"
+    }
+  }
+}

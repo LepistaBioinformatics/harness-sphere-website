@@ -1,0 +1,53 @@
+{
+  "docs": [
+    {
+      "slug": "getting-started",
+      "category": "basics",
+      "order": 1,
+      "title": { "en-US": "Getting Started", "pt-BR": "Primeiros Passos" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "understanding-layers",
+      "category": "basics",
+      "order": 2,
+      "title": { "en-US": "Understanding the Layers", "pt-BR": "Entendendo as Camadas" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "installation",
+      "category": "basics",
+      "order": 3,
+      "title": { "en-US": "Installation & Platforms", "pt-BR": "Instalação e Plataformas" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "configuration",
+      "category": "configuration",
+      "order": 4,
+      "title": { "en-US": "Configuration", "pt-BR": "Configuração" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "otlp-backend",
+      "category": "integration",
+      "order": 5,
+      "title": { "en-US": "Send to an OTLP Backend", "pt-BR": "Enviar para um Backend OTLP" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "connect-ecosystem",
+      "category": "integration",
+      "order": 6,
+      "title": { "en-US": "Connect OpenClaw, Hermes & PicoClaw", "pt-BR": "Conectar OpenClaw, Hermes e PicoClaw" },
+      "locales": ["en-US", "pt-BR"]
+    },
+    {
+      "slug": "troubleshooting",
+      "category": "reference",
+      "order": 7,
+      "title": { "en-US": "Troubleshooting & FAQ", "pt-BR": "Solução de Problemas e FAQ" },
+      "locales": ["en-US", "pt-BR"]
+    }
+  ]
+}
