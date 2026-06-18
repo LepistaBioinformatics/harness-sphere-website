@@ -63,13 +63,20 @@ public/content/
 
 ## Deployment
 
-The build is deployment-agnostic. Set a base path for subpath hosting (e.g. GitHub Pages):
+Live at **https://lepistabioinformatics.github.io/harness-sphere-website/**.
+
+Every push to `main` builds and publishes via GitHub Actions
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) → GitHub Pages). The
+workflow builds with `VITE_BASE=/harness-sphere-website/`, copies `index.html` to
+`404.html` (Pages has no history-API fallback, so unknown routes serve the SPA shell and
+the router resolves them client-side), and drops a `.nojekyll` marker.
+
+The build itself is deployment-agnostic — `base` defaults to `/` and is read everywhere via
+`import.meta.env.BASE_URL`. For a different host, just set the base:
 
 ```bash
-VITE_BASE=/harness-sphere-website/ yarn build
+VITE_BASE=/your-path/ yarn build
 ```
-
-`base` defaults to `/`. The router reads it via `import.meta.env.BASE_URL`.
 
 ## License
 
