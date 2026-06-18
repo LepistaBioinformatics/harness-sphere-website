@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import { Container } from '../ui/container'
 import { SectionHeading } from '../ui/section-heading'
+import { asList } from '../../lib/as-list'
 
 export function Ecosystem() {
   const { t } = useTranslation()
-  const items = t('ecosystem.items', { returnObjects: true }) as {
-    name: string
-    desc: string
-  }[]
+  const items = asList<{ name: string; desc: string }>(
+    t('ecosystem.items', { returnObjects: true }),
+  )
   const accents = ['var(--color-brand-400)', 'var(--color-infra)', 'var(--color-science)']
 
   return (

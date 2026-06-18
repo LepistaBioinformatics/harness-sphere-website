@@ -99,6 +99,23 @@
   animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Orbit rotation for the hero visual (used via arbitrary `[animation:spin_...]`) */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 /* ── Code highlighting (rehype-highlight → highlight.js classes) ──
    On-brand theme so docs code blocks match the rest of the site. */
 .hljs {

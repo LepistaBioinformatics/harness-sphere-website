@@ -33,7 +33,7 @@ export function MarkdownRenderer({ children }: { children: string }) {
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
         ]}
         components={{
-          a({ href, children, ...props }) {
+          a({ href, children, node, ...props }) {
             const external = href?.startsWith('http')
             return (
               <a

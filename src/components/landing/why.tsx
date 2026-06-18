@@ -2,11 +2,12 @@ import { useTranslation } from 'react-i18next'
 import { Check, X } from 'lucide-react'
 import { Container } from '../ui/container'
 import { SectionHeading } from '../ui/section-heading'
+import { asList } from '../../lib/as-list'
 
 export function Why() {
   const { t } = useTranslation()
-  const pain = t('why.pain', { returnObjects: true }) as string[]
-  const solution = t('why.solution', { returnObjects: true }) as string[]
+  const pain = asList<string>(t('why.pain', { returnObjects: true }))
+  const solution = asList<string>(t('why.solution', { returnObjects: true }))
 
   return (
     <section className="py-20">

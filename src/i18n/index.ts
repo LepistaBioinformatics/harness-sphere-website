@@ -18,14 +18,13 @@ i18n
       'pt-BR': { common: ptBR },
     },
     fallbackLng: FALLBACK_LOCALE,
-    supportedLngs: SUPPORTED_LOCALES,
-    // Map regional variants (e.g. `pt`, `en-GB`) onto our two locales.
-    load: 'currentOnly',
-    nonExplicitSupportedLngs: true,
+    // Array/object values (e.g. landing bullet lists) are returned as-is.
+    returnObjects: true,
     defaultNS: 'common',
     interpolation: { escapeValue: false },
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['querystring', 'localStorage', 'navigator'],
+      lookupQuerystring: 'lng',
       lookupLocalStorage: 'hs-locale',
       caches: ['localStorage'],
     },

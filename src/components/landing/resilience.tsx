@@ -2,13 +2,13 @@ import { useTranslation } from 'react-i18next'
 import { ShieldCheck } from 'lucide-react'
 import { Container } from '../ui/container'
 import { SectionHeading } from '../ui/section-heading'
+import { asList } from '../../lib/as-list'
 
 export function Resilience() {
   const { t } = useTranslation()
-  const points = t('resilience.points', { returnObjects: true }) as {
-    title: string
-    body: string
-  }[]
+  const points = asList<{ title: string; body: string }>(
+    t('resilience.points', { returnObjects: true }),
+  )
 
   return (
     <section className="py-20">

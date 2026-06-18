@@ -2,10 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { Cpu } from 'lucide-react'
 import { Container } from '../ui/container'
 import { SectionHeading } from '../ui/section-heading'
+import { asList } from '../../lib/as-list'
 
 export function RunsAnywhere() {
   const { t } = useTranslation()
-  const targets = t('runsAnywhere.targets', { returnObjects: true }) as string[]
+  const targets = asList<string>(t('runsAnywhere.targets', { returnObjects: true }))
 
   return (
     <section className="py-20">
